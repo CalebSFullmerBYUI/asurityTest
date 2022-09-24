@@ -1,0 +1,47 @@
+<a href="contacts">Cancel</a>
+<div *ngIf="contactId != -1">{{ contactId }}</div>
+
+<form #contactForm="ngForm" (submit)="submitContact(contactForm)">
+    <input name="firstName" required maxlength="{{ maxNameChar }}" #firstName="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.firstName">
+    <p *ngIf="firstName.invalid" class="inputError">First name is invalid (must be between 1 and 20 characters)</p>
+
+    <input name="lastName" required maxlength="{{ maxNameChar }}" #lastName="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.lastName">
+    <p *ngIf="lastName.invalid" class="inputError">Last name is invalid (must be between 1 and 20 characters)</p>
+
+    <input type="email" required [pattern]="emailPattern" name="emailAddress" #emailAddress="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.emailAddress">
+    <p *ngIf="emailAddress.invalid" class="inputError">Entered address is not recognized as a valid email</p>
+
+    <input name="phoneNumber" [pattern]="phonePattern" required #phoneNumber="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.phoneNumber">
+    <p *ngIf="phoneNumber.invalid" class="inputError"
+        >Phone number must be in form ########## or (###)-###-####</p>
+
+
+    <input name="street" required maxlength="{{ maxStreetChar }}" #street="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.address.street">
+    <p *ngIf="street.invalid" class="inputError">Street name is invalid (must be between 1 and 100 characters)</p>
+
+    <input name="city" required maxlength="{{ maxCityChar }}" #city="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.address.city">
+    <p *ngIf="city.invalid" class="inputError">City name is invalid (must be between 1 and 50 characters</p>
+
+    <select name="state" required #state="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.address.state">
+        <option *ngFor="let state of statesArr" value="{{ state.abbrev }}">{{ state.name }}</option>
+    </select>
+
+    <input name="zip" required #zip="ngModel" [pattern]="zipPattern" maxlength="5"
+        [ngModel]="oldData == undefined ? '' : oldData.address.zip">
+    <p *ngIf="zip.invalid" class="inputError">Must only have 5 digits</p>
+
+
+    <select name="contactFrequency" required #contactFrequency="ngModel"
+        [ngModel]="oldData == undefined ? '' : oldData.contactFrequency">
+        <option *ngFor="let item of contactFreqArr" value="{{ item.id }}">{{ item.name }}</option>
+    </select>
+
+    <button tyle="submit">Submit</button>
+</form>

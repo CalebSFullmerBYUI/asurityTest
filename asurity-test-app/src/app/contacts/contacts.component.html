@@ -1,0 +1,33 @@
+<!--
+    grid should show
+    firstname
+    lastname
+    city
+    state
+    phonenumber
+-->
+<div class="contactsGrid">
+    <div>
+        <a href="/add">Add new contact</a>
+    </div>
+
+    <div class="contactRow contactsHeaderRow">
+        <div class="contactCol contactCol2"><p style="display: inline;">First Name</p></div>
+        <div class="contactCol contactCol3"><p>Last Name</p></div>
+        <div class="contactCol contactCol4"><p>City</p></div>
+        <div class="contactCol contactCol5"><p>State</p></div>
+        <div class="contactCol contactCol6"><p>Phone Number</p></div>
+    </div>
+
+    <div class="contactRow" *ngFor="let contact of contactsArr">
+        <div class="contactCol contactCol1">
+            <a href="/edit/{{ contact.id }}">Edit</a>
+            <a (click)="deleteContact(contact.id)">Delete</a>
+        </div>
+        <div class="contactCol contactCol2"><p>{{ contact.firstName }}</p></div>
+        <div class="contactCol contactCol3"><p>{{ contact.lastName }}</p></div>
+        <div class="contactCol contactCol4"><p>{{ contact.address.city }}</p></div>
+        <div class="contactCol contactCol5"><p>{{ contact.address.state }}</p></div>
+        <div class="contactCol contactCol6"><p>{{ contact.phoneNumber }}</p></div>
+    </div>
+</div>
