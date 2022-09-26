@@ -27,7 +27,7 @@
         <div class="contactCol contactCol2"><p>{{ contact.firstName }}</p></div>
         <div class="contactCol contactCol3"><p>{{ contact.lastName }}</p></div>
         <div class="contactCol contactCol4"><p>{{ contact.address.city }}</p></div>
-        <div class="contactCol contactCol5"><p>{{ contact.address.state }}</p></div>
+        <div class="contactCol contactCol5"><p>{{ getStateName(contact.address.state) }}</p></div>
         <div class="contactCol contactCol6"><p>{{ contact.phoneNumber }}</p></div>
     </div>
 </div>

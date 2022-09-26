@@ -33,4 +33,8 @@ export class ContactsComponent implements OnInit {
     this.contactsArr = this.databaseService.getAllContacts();
   }
 
+  getStateName(stateAbbrev: String) {
+    return this.apiService.getStateName(stateAbbrev);
+  }
+
 }
