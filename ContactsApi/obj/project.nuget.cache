@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "nD0f6N9XprqkAMvw0Df5gnCj1ocMkOveVZcrHA004qY3YGRGIS7RPiBKISj/OqSFIaUB8gDU/971HRxzTKuNYg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cfdia\\source\\repos\\asurityTest\\ContactsApi\\ContactsApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cfdia\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\cfdia\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\cfdia\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\cfdia\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\cfdia\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\cfdia\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
