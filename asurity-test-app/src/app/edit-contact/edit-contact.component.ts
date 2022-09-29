@@ -24,9 +24,10 @@ export class EditContactComponent implements OnInit {
 
   contactId = -1;
   oldData : any;
+  errorMessage = "";
 
   constructor(private routeData : ActivatedRoute, private databaseService : DatabaseService,
-    private apiService : ApiService, private router : Router) {
+    private apiService : ApiService, public router : Router) {
     this.statesArr = apiService.getStatesList();
     this.contactFreqArr = apiService.getContactFrequencies();
   }
@@ -34,15 +35,28 @@ export class EditContactComponent implements OnInit {
   ngOnInit(): void {
     let contactId = this.routeData.snapshot.paramMap.get("contactId");
     this.contactId = (contactId == null ? -1 : Number(contactId));
+    this.updateErrorMessage();
 
     if (this.contactId != -1) {
       this.oldData = this.databaseService.getContactById(this.contactId);
 
       if (this.oldData == undefined) {
-        // throw and display some general error., maybe redirect to contacts page.
+        sessionStorage.setItem("errorMessage", "Error, contact not found.");
+        this.router.navigate(['/contacts']);
       }
     } else {
       this.oldData = undefined;
+    }
+  }
+
+  updateErrorMessage() {
+    let errorMessage = sessionStorage.getItem("errorMessage");
+
+    if (errorMessage != null && errorMessage.length > 0) {
+      this.errorMessage = errorMessage;
+      sessionStorage.setItem("errorMessage", "");
+    } else {
+      this.errorMessage = "";
     }
   }
 
@@ -100,12 +114,14 @@ export class EditContactComponent implements OnInit {
 
     if (!this.statesArr.find((s: { abbrev: any; }) => s.abbrev == state)) {
       allValid = false;
-      // Throw some general error.
+      sessionStorage.setItem("errorMessage", "Error, could not recognize the entered State.");
+      this.updateErrorMessage();
     }
 
     if (!this.contactFreqArr.find((f: { id: number; }) => f.id == contactFrequency)) {
       allValid = false;
-      // Throw some genneral error.
+      sessionStorage.setItem("errorMessage", "Error, could not recognize the entered contact preferance.");
+      this.updateErrorMessage();
     }
 
 
@@ -133,7 +149,8 @@ export class EditContactComponent implements OnInit {
         this.router.navigate(['/contacts']);
         // Successfully updated.
       } else {
-        // Error updating.
+        sessionStorage.setItem("errorMessage", "Error, could not add new data.");
+        this.updateErrorMessage();
       }
     }
   }

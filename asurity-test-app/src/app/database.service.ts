@@ -168,13 +168,13 @@ export class DatabaseService {
     if (contactsArr != null) {
       // Sort by firstName and lastName
       return JSON.parse(contactsArr).sort((contact1: { firstName: String; lastName: String; }, contact2: { firstName: String; lastName: String; }) => {
-        if (contact1.firstName > contact2.firstName) {
+        if (contact1.firstName.toUpperCase() > contact2.firstName.toUpperCase()) {
           return 1;
-        } else if (contact1.firstName < contact2.firstName) {
+        } else if (contact1.firstName.toUpperCase() < contact2.firstName.toUpperCase()) {
           return -1;
-        } else if (contact1.lastName > contact2.lastName) {
+        } else if (contact1.lastName.toUpperCase() > contact2.lastName.toUpperCase()) {
           return 1;
-        } else if (contact1.lastName < contact2.lastName) {
+        } else if (contact1.lastName.toUpperCase() < contact2.lastName.toUpperCase()) {
           return -1;
         }
 

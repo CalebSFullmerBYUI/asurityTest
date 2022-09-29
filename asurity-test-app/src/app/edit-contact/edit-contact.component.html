@@ -1,47 +1,75 @@
-<a href="contacts">Cancel</a>
-<div *ngIf="contactId != -1">{{ contactId }}</div>
+<form #contactForm="ngForm" (submit)="submitContact(contactForm)" class="contact-form">
+    <p *ngIf="errorMessage.length != 0" class="error-message">{{ errorMessage }}</p>
 
-<form #contactForm="ngForm" (submit)="submitContact(contactForm)">
+    <div class="input-div">
+    <label>First Name:</label>
     <input name="firstName" required maxlength="{{ maxNameChar }}" #firstName="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.firstName">
-    <p *ngIf="firstName.invalid" class="inputError">First name is invalid (must be between 1 and 20 characters)</p>
+    <p *ngIf="firstName.invalid && firstName.dirty" class="input-error">First name is invalid (must be between 1 and 20 characters)</p>
+    </div>
 
+    <div class="input-div">
+    <label>Last Name:</label>
     <input name="lastName" required maxlength="{{ maxNameChar }}" #lastName="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.lastName">
-    <p *ngIf="lastName.invalid" class="inputError">Last name is invalid (must be between 1 and 20 characters)</p>
+    <p *ngIf="lastName.invalid && lastName.dirty" class="input-error">Last name is invalid (must be between 1 and 20 characters)</p>
+    </div>
 
+    <div class="input-div">
+    <label>Email:</label>
     <input type="email" required [pattern]="emailPattern" name="emailAddress" #emailAddress="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.emailAddress">
-    <p *ngIf="emailAddress.invalid" class="inputError">Entered address is not recognized as a valid email</p>
+    <p *ngIf="emailAddress.invalid && emailAddress.dirty" class="input-error">Entered address is not recognized as a valid email</p>
+    </div>
 
+    <div class="input-div">
+    <label>Phone Number:</label>
     <input name="phoneNumber" [pattern]="phonePattern" required #phoneNumber="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.phoneNumber">
-    <p *ngIf="phoneNumber.invalid" class="inputError"
+    <p *ngIf="phoneNumber.invalid && phoneNumber.dirty" class="input-error"
         >Phone number must be in form ########## or (###)-###-####</p>
+    </div>
 
 
+    <div class="input-div">
+    <label>Street Address:</label>
     <input name="street" required maxlength="{{ maxStreetChar }}" #street="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.address.street">
-    <p *ngIf="street.invalid" class="inputError">Street name is invalid (must be between 1 and 100 characters)</p>
+    <p *ngIf="street.invalid && street.dirty" class="input-error">Street name is invalid (must be between 1 and 100 characters)</p>
+    </div>
 
+    <div class="input-div">
+    <label>City:</label>
     <input name="city" required maxlength="{{ maxCityChar }}" #city="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.address.city">
-    <p *ngIf="city.invalid" class="inputError">City name is invalid (must be between 1 and 50 characters</p>
+    <p *ngIf="city.invalid && city.dirty" class="input-error">City name is invalid (must be between 1 and 50 characters</p>
+    </div>
 
+    <div class="input-div">
+    <label>State:</label>
     <select name="state" required #state="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.address.state">
         <option *ngFor="let state of statesArr" value="{{ state.abbrev }}">{{ state.name }}</option>
     </select>
+    </div>
 
+    <div class="input-div">
+    <label>Zip Code:</label>
     <input name="zip" required #zip="ngModel" [pattern]="zipPattern" maxlength="5"
         [ngModel]="oldData == undefined ? '' : oldData.address.zip">
-    <p *ngIf="zip.invalid" class="inputError">Must only have 5 digits</p>
+    <p *ngIf="zip.invalid && zip.dirty" class="input-error">Must only have 5 digits</p>
+    </div>
 
-
+    <div class="input-div">
+    <label>Contact Preferences:</label>
     <select name="contactFrequency" required #contactFrequency="ngModel"
         [ngModel]="oldData == undefined ? '' : oldData.contactFrequency">
         <option *ngFor="let item of contactFreqArr" value="{{ item.id }}">{{ item.name }}</option>
     </select>
+    </div>
 
-    <button tyle="submit">Submit</button>
+    <div class="form-btns">
+        <button class="form-btn" (click)="this.router.navigate(['/contacts']);">Cancel</button>
+        <button class="form-btn" type="submit">Submit</button>
+    </div>
 </form>

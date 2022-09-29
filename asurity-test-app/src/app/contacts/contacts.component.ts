@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contacts',
@@ -8,24 +9,14 @@ import { ApiService } from '../api.service';
   styleUrls: ['./contacts.component.less']
 })
 export class ContactsComponent implements OnInit {
-  /*
-    firstname
-    lastname
-    emailaddress
-    phonenumber
-    address
-        street
-        city
-        state
-        zip
-    contact frequency
-  */
   contactsArr : any;
+  errorMessage = "";
 
-  constructor(private databaseService: DatabaseService, private apiService : ApiService) { }
+  constructor(private databaseService: DatabaseService, private apiService : ApiService, public router: Router) { }
 
   ngOnInit(): void {
     this.contactsArr = this.databaseService.getAllContacts();
+    this.updateErrorMessage();
   }
 
   deleteContact(id: Number) {
@@ -35,6 +26,17 @@ export class ContactsComponent implements OnInit {
 
   getStateName(stateAbbrev: String) {
     return this.apiService.getStateName(stateAbbrev);
+  }
+
+  updateErrorMessage() {
+    let errorMessage = sessionStorage.getItem("errorMessage");
+
+    if (errorMessage != null && errorMessage.length > 0) {
+      this.errorMessage = errorMessage;
+      sessionStorage.setItem("errorMessage", "");
+    } else {
+      this.errorMessage = "";
+    }
   }
 
 }
